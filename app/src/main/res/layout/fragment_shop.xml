@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/holo_blue_light"
+        >
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_search_black_24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="75dp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@drawable/seacher_background"
+            android:layout_centerVertical="true"
+            android:layout_margin="70dp"
+
+            />
+
+    </RelativeLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/shopfragment_tab"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+    </android.support.design.widget.TabLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/shopfragment_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+</LinearLayout>
