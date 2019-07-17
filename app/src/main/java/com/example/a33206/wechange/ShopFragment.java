@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import com.example.a33206.wechange.Adapt.ViewPagerTabAdpater;
 
@@ -17,8 +18,9 @@ import java.util.List;
 
 // 二手商店市场fragment 上层：Work界面 下层：商品查询界面
 public class ShopFragment extends Fragment {
-    ViewPager viewPager;
+   ViewPager viewPager;
     TabLayout tabLayout;
+
     ShopMainFragment mainFragment ;
     ShopGooditemFragment gooditemFragment;
     ShopGooditemFragment gooditemFragment2;
@@ -32,6 +34,7 @@ public class ShopFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shop,container,false);
         viewPager = view.findViewById(R.id.shopfragment_viewpager);
         tabLayout = view.findViewById(R.id.shopfragment_tab);
+
         mainFragment = new ShopMainFragment();
         gooditemFragment = new ShopGooditemFragment();
         gooditemFragment2=new ShopGooditemFragment();

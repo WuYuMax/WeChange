@@ -5,37 +5,209 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/holo_blue_light"
-        >
 
-        <Button
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="75dp"
-            android:background="@drawable/ic_search_black_24dp" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="@drawable/seacher_background"
-            android:layout_centerVertical="true"
-            android:layout_margin="70dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/holo_blue_light">
 
-            />
+                <Button
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="75dp"
+                    android:background="@drawable/ic_search_black_24dp" />
 
-    </RelativeLayout>
-    <android.support.design.widget.TabLayout
-        android:id="@+id/shopfragment_tab"
-        android:layout_width="match_parent"
-        android:layout_height="30dp">
-    </android.support.design.widget.TabLayout>
-    <android.support.v4.view.ViewPager
-        android:id="@+id/shopfragment_viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="70dp"
+                    android:background="@drawable/seacher_background" />
 
-    </android.support.v4.view.ViewPager>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/logo" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@android:color/holo_blue_light">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/corn_30_background">
+
+                    <Button
+                        android:id="@+id/phone_button"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/ic_phone_android_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/phone_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/phone_button"
+                        android:layout_marginLeft="25dp"
+                        android:text="二手手机"
+                        android:textColor="@android:color/black" />
+
+                    <Button
+                        android:id="@+id/book_button"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_toRightOf="@id/phone_button"
+                        android:background="@drawable/ic_phone_android_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/phone_button"
+                        android:layout_marginLeft="35dp"
+                        android:layout_toRightOf="@id/phone_text"
+                        android:text="书籍"
+                        android:textColor="@android:color/black" />
+
+                    <Button
+
+                        android:id="@+id/game_button"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_toRightOf="@id/book_button"
+                        android:background="@drawable/ic_phone_android_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/phone_button"
+                        android:layout_marginLeft="35dp"
+                        android:layout_toRightOf="@id/book_button"
+                        android:text="游戏交易"
+                        android:textColor="@android:color/black" />
+
+                    <Button
+                        android:id="@+id/cloth_button"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_toRightOf="@id/game_button"
+                        android:background="@drawable/ic_phone_android_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/phone_button"
+                        android:layout_marginLeft="50dp"
+                        android:layout_toRightOf="@id/game_button"
+                        android:text="服饰"
+                        android:textColor="@android:color/black" />
+
+                    <Button
+
+                        android:id="@+id/computer_button"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_below="@id/phone_text"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/ic_phone_android_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/computer_button"
+                        android:layout_marginLeft="25dp"
+                        android:text="二手电脑"
+                        android:textColor="@android:color/black" />
+
+                    <Button
+
+                        android:id="@+id/peijian_button"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_below="@id/phone_text"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@id/computer_button"
+                        android:background="@drawable/ic_phone_android_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/computer_button"
+                        android:layout_marginLeft="35dp"
+                        android:layout_toRightOf="@id/computer_button"
+                        android:text="电子配件"
+                        android:textColor="@android:color/black" />
+
+                    <Button
+
+                        android:id="@+id/jiajv_button"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_below="@id/phone_text"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@id/peijian_button"
+                        android:background="@drawable/ic_phone_android_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/computer_button"
+                        android:layout_marginLeft="50dp"
+                        android:layout_toRightOf="@id/peijian_button"
+                        android:text="家具"
+                        android:textColor="@android:color/black" />
+
+                    <Button
+
+                        android:id="@+id/other_button"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_below="@id/phone_text"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@id/jiajv_button"
+                        android:background="@drawable/ic_phone_android_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/computer_button"
+                        android:layout_marginLeft="50dp"
+                        android:layout_toRightOf="@id/jiajv_button"
+                        android:text="其他"
+                        android:textColor="@android:color/black" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/shopfragment_tab"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"></android.support.design.widget.TabLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/shopfragment_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"></android.support.v4.view.ViewPager>
+
+
+
 </LinearLayout>
