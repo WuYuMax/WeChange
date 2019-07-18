@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ceffe6"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/holo_blue_light">
+
+            <Button
+                android:id="@+id/release_delete"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/ic_close_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="发布"
+                android:textColor="@android:color/white"
+                android:textSize="20dp" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/corn_30_background"
+            >
+            <EditText
+                android:id="@+id/release_goodname"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="品类名称"
+                />
+            <EditText
+                android:id="@+id/release_know"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="宝贝介绍（包括转手的原因，入手渠道和是应用感受）"
+                ></EditText>
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/ic_add_black_24dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/corn_30_background"
+            >
+            <EditText
+                android:id="@+id/release_goodprice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="价格  :"
+                android:textSize="20dp"
+                android:textColor="@android:color/black"
+                />
+            <EditText
+                android:id="@+id/release_kind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="种类   :"
+                android:textSize="23dp"
+                android:textColor="@android:color/black"
+                />
+            <EditText
+                android:id="@+id/tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="联系方式   :"
+                android:textColor="@android:color/black"
+                />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/release_prelook"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="预览"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="20dp"
+            android:gravity="center"
+            />
+        <Button
+            android:layout_marginTop="15dp"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="发布"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            />
+    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

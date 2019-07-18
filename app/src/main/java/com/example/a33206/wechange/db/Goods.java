@@ -1,13 +1,15 @@
 package com.example.a33206.wechange.db;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Goods {
+public class Goods implements Serializable {
+    private String user_name;
     private String Good_Id;
     private List<Integer> Pictures;
     private String Good_name;
     private String Good_price;
-    private Commit commit;
+    private String commit;
     private int number;
 
 
@@ -43,14 +45,6 @@ public class Goods {
         Good_price = good_price;
     }
 
-    public Commit getCommit() {
-        return commit;
-    }
-
-    public void setCommit(Commit commit) {
-        this.commit = commit;
-    }
-
     public int getNumber() {
         return number;
     }
@@ -59,9 +53,19 @@ public class Goods {
         this.number = number;
     }
 
-    public class Commit {
-        private String Picture;
-        private String name;
-        private String context;
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getCommit() {
+        return commit;
+    }
+
+    public void setCommit(String commit) {
+        this.commit = commit;
     }
 }

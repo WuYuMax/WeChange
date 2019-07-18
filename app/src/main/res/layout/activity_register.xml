@@ -62,6 +62,7 @@
             android:layout_below="@id/pre_name"
             android:layout_marginTop="20dp"
             android:background="@android:color/white"
+
             />
         <EditText
             android:id="@+id/pre_repassword"

@@ -2,10 +2,17 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="商品种类"
-        android:textSize="100dp"
-        />
+        android:background="#ceffe6"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/show_good_item_recycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
 </LinearLayout>

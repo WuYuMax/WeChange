@@ -1,4 +1,4 @@
-package com.example.a33206.wechange;
+package com.example.a33206.wechange.Adapt;
 
 
 import android.support.v4.app.Fragment;
