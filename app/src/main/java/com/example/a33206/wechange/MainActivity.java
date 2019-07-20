@@ -25,18 +25,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Time_Limit--;
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this,WorkActivity.class);
                 startActivity(intent);
                 finish();
             }
         };
 
-        SharedPreferences prefs =PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        //如果状态现实未登录则进入登录界面;
-        if (!prefs.getBoolean("status",false)){
+
             time.schedule(task,2000);
         }
 
     }
 
-}
+

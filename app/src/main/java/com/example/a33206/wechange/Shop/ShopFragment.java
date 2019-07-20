@@ -1,7 +1,9 @@
 package com.example.a33206.wechange.Shop;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.a33206.wechange.Adapt.ViewPagerTabAdpater;
+import com.example.a33206.wechange.LoginActivity;
 import com.example.a33206.wechange.MainActivity;
 import com.example.a33206.wechange.R;
 
@@ -39,9 +42,9 @@ public class ShopFragment extends Fragment {
         tabLayout = view.findViewById(R.id.shopfragment_tab);
         addbutton = view.findViewById(R.id.shop_add);
         mainFragment = new ShopMainFragment();
-        gooditemFragment = new ShopGooditemFragment();
-        gooditemFragment2=new ShopGooditemFragment();
-        gooditemFragment3 = new ShopGooditemFragment();
+        gooditemFragment = new ShopGooditemFragment("服饰");
+        gooditemFragment2=new ShopGooditemFragment("电器");
+        gooditemFragment3 = new ShopGooditemFragment("摆件");
 
         return view;
     }
@@ -52,8 +55,14 @@ public class ShopFragment extends Fragment {
         addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),ReleaseActivity.class);
-                startActivity(intent);
+                SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(getContext());
+                if (!prefs.getBoolean("status",false)){
+                    Intent intent = new Intent(getContext(),LoginActivity.class);
+                    getContext().startActivity(intent);
+                }else {
+                    Intent intent = new Intent(getActivity(), ReleaseActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         if (TabList.size()==0) {

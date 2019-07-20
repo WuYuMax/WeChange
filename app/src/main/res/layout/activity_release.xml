@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -17,7 +18,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/holo_blue_light">
+            android:background="@android:color/holo_blue_light"
+            android:layout_weight="0.008"
+            >
 
             <Button
                 android:id="@+id/release_delete"
@@ -39,6 +42,7 @@
             android:layout_margin="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:orientation="vertical"
             android:background="@drawable/corn_30_background"
             >
@@ -53,20 +57,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="宝贝介绍（包括转手的原因，入手渠道和是应用感受）"
+                android:background="#fff"
                 ></EditText>
-            <Button
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="100dp"
+            <HorizontalScrollView
+                android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@drawable/ic_add_black_24dp"
-                />
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+
+                    >
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/release_imageRecycly"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        />
+                    <Button
+                        android:id="@+id/release_addpic_button"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="15dp"
+                        android:background="@drawable/ic_add_black_24dp"
+                        />
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="15dp"
             android:layout_margin="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
             android:orientation="vertical"
             android:background="@drawable/corn_30_background"
             >
@@ -82,24 +109,202 @@
                 android:id="@+id/release_kind"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="种类   :"
-                android:textSize="23dp"
+                android:hint="个数   :"
+                android:textSize="20dp"
                 android:textColor="@android:color/black"
                 />
             <EditText
                 android:id="@+id/tel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="联系方式   :"
+                android:hint="联系方式(qq)"
+                android:textSize="20dp"
                 android:textColor="@android:color/black"
                 />
 
         </LinearLayout>
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/release_type_text"
+            android:text="货物种类"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:gravity="center"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/corn_30_background"
+            android:layout_margin="15dp"
+            >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                >
+                <Button
+                    android:id="@+id/release_phone_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/ic_phone_android_black_24dp" />
+
+                <TextView
+                    android:id="@+id/phone_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/release_phone_button"
+                    android:layout_marginLeft="25dp"
+                    android:text="二手手机"
+                    android:textColor="@android:color/black" />
+
+                <Button
+                    android:id="@+id/release_book_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@id/release_phone_button"
+                    android:background="@drawable/ic_book_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/release_phone_button"
+                    android:layout_marginLeft="35dp"
+                    android:layout_toRightOf="@id/phone_text"
+                    android:text="书籍"
+                    android:textColor="@android:color/black" />
+
+                <Button
+
+                    android:id="@+id/release_game_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@id/release_book_button"
+                    android:background="@drawable/ic_videogame_asset_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/release_phone_button"
+                    android:layout_marginLeft="35dp"
+                    android:layout_toRightOf="@id/release_book_button"
+                    android:text="游戏交易"
+                    android:textColor="@android:color/black" />
+
+                <Button
+                    android:id="@+id/release_cloth_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@id/release_game_button"
+                    android:background="@drawable/cloth"
+                    android:layout_marginRight="30dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/release_phone_button"
+                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@id/release_game_button"
+                    android:text="服饰"
+                    android:textColor="@android:color/black" />
+
+                <Button
+                    android:id="@+id/release_computer_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/phone_text"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/computer"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/release_computer_button"
+                    android:layout_marginLeft="25dp"
+                    android:text="二手电脑"
+                    android:textColor="@android:color/black" />
+
+                <Button
+
+                    android:id="@+id/release_peijian_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/phone_text"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/release_computer_button"
+                    android:background="@drawable/chip" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/release_computer_button"
+                    android:layout_marginLeft="35dp"
+                    android:layout_toRightOf="@id/release_computer_button"
+                    android:text="电子配件"
+                    android:textColor="@android:color/black" />
+
+                <Button
+
+                    android:id="@+id/release_jiajv_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/phone_text"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/release_peijian_button"
+                    android:background="@drawable/furniture" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/release_computer_button"
+                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@id/release_peijian_button"
+                    android:text="家具"
+                    android:textColor="@android:color/black" />
+
+                <Button
+
+                    android:id="@+id/release_other_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/phone_text"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/release_jiajv_button"
+                    android:background="@drawable/other" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/release_computer_button"
+                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@id/release_jiajv_button"
+                    android:text="其他"
+                    android:textColor="@android:color/black" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+        <TextView
             android:id="@+id/release_prelook"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
             android:text="预览"
             android:textColor="@android:color/holo_blue_light"
             android:textSize="20dp"
@@ -109,7 +314,8 @@
             android:layout_marginTop="15dp"
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
             android:background="@android:color/holo_blue_light"
             android:text="发布"
             android:textColor="@android:color/white"

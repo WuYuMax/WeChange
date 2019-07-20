@@ -1,5 +1,6 @@
 package com.example.a33206.wechange.Shop;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,10 +18,17 @@ import com.example.a33206.wechange.db.Goods;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressLint("ValidFragment")
 public class ShopGooditemFragment extends Fragment {
+
     private RecyclerView recyclerView;
     private GoodAdapt adapt;
     private List<Goods> goodsList= new ArrayList<>();
+    private String type;
+    @SuppressLint("ValidFragment")
+    public ShopGooditemFragment(String position) {
+        type = position;
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,6 +49,7 @@ public class ShopGooditemFragment extends Fragment {
             list.add(R.drawable.logo);
             app.setGood_Id("CN_01");
             app.setGood_name("APP ");
+            app.setUser_ID("123456789");
             app.setGood_price("298");
             app.setPictures(list);
             app.setNumber(5);
@@ -51,9 +60,10 @@ public class ShopGooditemFragment extends Fragment {
             list1.add(R.drawable.logo);
             xxx.setPictures(list1);
             xxx.setGood_Id("CN_00");
+            xxx.setUser_ID("2005");
             xxx.setNumber(0);
             xxx.setGood_price("300");
-            xxx.setGood_name("我也不知道是什么");
+            xxx.setGood_name(type);
             goodsList.add(xxx);
         }
     }

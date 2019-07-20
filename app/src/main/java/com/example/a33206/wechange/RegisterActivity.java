@@ -14,7 +14,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText name;
     private EditText password;
     private EditText re_password;
-    private EditText email;
+    private EditText phone;
+    private EditText qq;
     private Button register_button;
     private Button back_button;
     @Override
@@ -24,7 +25,8 @@ public class RegisterActivity extends AppCompatActivity {
         name = findViewById(R.id.pre_name);
         password = findViewById(R.id.pre_password);
         re_password = findViewById(R.id.pre_repassword);
-        email = findViewById(R.id.pre_email);
+        phone = findViewById(R.id.pre_phone);
+        qq = findViewById(R.id.pre_qq);
         register_button = findViewById(R.id.register_button);
         back_button = findViewById(R.id.back_button);
     }
@@ -45,9 +47,10 @@ public class RegisterActivity extends AppCompatActivity {
                 String pre_name =name.getText().toString();
                 String pre_password=password.getText().toString();
                 String pre_repassword=re_password.getText().toString();
-                String pre_emal = email.getText().toString();
+                String pre_phone =phone .getText().toString();
+                String pre_qq = qq.getText().toString();
                 if (pre_password.toString().equals(pre_repassword.toString())){
-                    Intent intent = new Intent(RegisterActivity.this,WorkActivity.class);
+                    Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }

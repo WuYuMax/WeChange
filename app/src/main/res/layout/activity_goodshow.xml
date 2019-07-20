@@ -9,7 +9,9 @@
     <ScrollView
         android:id="@+id/show_good_scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+
+        >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/user_pic"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="30dp"
                 android:text="admins"
                 android:textSize="20dp"
                 android:textColor="@android:color/black"
@@ -72,21 +74,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@id/user_name"
                 android:text="信用良好"
                 android:textColor="@android:color/holo_blue_light"
                 />
             <TextView
-                android:id="@+id/tel"
+
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:text="库存:0件"
+                android:gravity="center"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="15dp"
-                android:layout_centerVertical="true"
-                android:text="联系一下"
-
-                android:textColor="@android:color/holo_blue_light"
+                android:id="@+id/show_good_number"
                 />
         </RelativeLayout>
         <TextView
@@ -105,6 +106,50 @@
             android:textSize="20dp"
             android:textColor="@android:color/black"
             />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            >
+            <TextView
+                android:id="@id/tel"
+                android:text="（联系方式(qq)）"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:textSize="15dp"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/show_good_likenumber"
+                android:text="0人想要"
+                android:gravity="center"
+                android:layout_toLeftOf="@id/like"
+                android:layout_marginRight="15dp"
+                />
+            <TextView
+                android:id="@+id/buy"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="给我来一个"
+                android:textColor="@android:color/holo_blue_light"
+                android:gravity="center"
+                android:layout_marginRight="15dp"
+                android:layout_alignParentRight="true"
+                />
+            <TextView
+                android:id="@+id/like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/buy"
+                android:layout_marginRight="15dp"
+                android:layout_centerVertical="true"
+                android:text="想要"
+
+                android:textColor="@android:color/holo_blue_light"
+                />
+        </RelativeLayout>
         <TextView
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
@@ -114,13 +159,15 @@
             android:textSize="20dp"
             android:background="#ceffe6"
             />
+
         <android.support.v7.widget.RecyclerView
-            android:background="#ceffe6"
             android:id="@+id/showgood_recycle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#ceffe6">
 
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

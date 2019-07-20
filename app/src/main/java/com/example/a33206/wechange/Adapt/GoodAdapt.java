@@ -2,6 +2,8 @@ package com.example.a33206.wechange.Adapt;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -73,10 +75,16 @@ public class GoodAdapt extends RecyclerView.Adapter<GoodAdapt.ViewHolder> {
         viewHolder.theview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,BlockActivity.class);
-                intent.putExtra("good",goods);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context);
+                if (!prefs.getBoolean("status",false)){
+                    Intent intent = new Intent(context,LoginActivity.class);
+                    context.startActivity(intent);
+                }else {
+                    Intent intent = new Intent(context, BlockActivity.class);
+                    intent.putExtra("good", goods);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
             }
         });
     }

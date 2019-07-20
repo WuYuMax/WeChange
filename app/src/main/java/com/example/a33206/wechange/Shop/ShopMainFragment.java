@@ -32,6 +32,13 @@ public class ShopMainFragment extends Fragment {
     private Button peijianbutton;
     private Button jiajvbutton;
     private Button otherbutton;
+    private static boolean hasMore = false; // 是否有下一页
+    private static int currentPage ;
+    // 若是上拉加载更多的网络请求 则不需要删除数据
+    private boolean isLoadingMore = false;
+    // 最后一个条目位置
+    private static int lastVisibleItem = 0;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +58,27 @@ public class ShopMainFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         goodAdapt =new GoodAdapt(getActivity(),goodsList);
         recyclerView.setAdapter(goodAdapt);
+        LooadingMore();
         return view;
+    }
+
+    private void LooadingMore() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (!isLoadingMore){
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE){
+
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
     }
 
     @Override

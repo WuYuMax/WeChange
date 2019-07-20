@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.a33206.wechange.Action.ActionFragment;
 import com.example.a33206.wechange.Adapt.ViewPagerAdapt;
 import com.example.a33206.wechange.Shop.ShopFragment;
 
@@ -34,12 +35,10 @@ public class WorkActivity extends AppCompatActivity {
         //实例化
         shopFragment = new ShopFragment();
         actionFragment = new ActionFragment();
-        commitFragment = new CommitFragment();
         myFragment = new MyFragment();
         //添加页面
         fragmentList.add(shopFragment);
         fragmentList.add(actionFragment);
-        fragmentList.add(commitFragment);
         fragmentList.add(myFragment);
 
         //Viewpager
@@ -89,10 +88,9 @@ public class WorkActivity extends AppCompatActivity {
                 .setActiveColor("#1e34d6")
                 .setInActiveColor("#ffffff")
                 .setBarBackgroundColor("#4a90d2")
-                .addItem(new BottomNavigationItem(R.drawable.ic_arrow_back_black_24dp,"Shop"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_search_black_24dp,"Activity"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_remove_red_eye_black_24dp,"commit"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_remove_red_eye_white_24dp,"my"))
+                .addItem(new BottomNavigationItem(R.drawable.shoppic,"商品市场"))
+                .addItem(new BottomNavigationItem(R.drawable.activitypic,"活动广场"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_remove_red_eye_white_24dp,"个人信息"))
                 .setFirstSelectedPosition(0)
                 .initialise();
     }

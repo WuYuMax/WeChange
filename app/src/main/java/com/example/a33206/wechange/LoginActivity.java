@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
+
             }
         });
 
@@ -67,12 +68,13 @@ public class LoginActivity extends AppCompatActivity {
 //                if(name_text.equals("admin")&&password.equals("38")){
                     Intent intent = new Intent(LoginActivity.this,WorkActivity.class);
                     startActivity(intent);
-//                    SharedPreferences.Editor editor= PreferenceManager
-//                            .getDefaultSharedPreferences(LoginActivity.this)
-//                            .edit();
-//                    editor.putBoolean("status",true);
-//                    editor.apply();
-//                    finish();
+                    SharedPreferences.Editor editor= PreferenceManager
+                            .getDefaultSharedPreferences(LoginActivity.this)
+                            .edit();
+                    editor.putBoolean("status",true);
+                    editor.apply();
+                    finish();
+
 //                }
             }
         });

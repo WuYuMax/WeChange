@@ -54,14 +54,29 @@
                     android:text="￥266"
                     android:textColor="@android:color/holo_red_dark"
                     android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/good_number"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:text="库存：5件"
-                    android:textSize="10dp" />
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/good_likenumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 人想要"
+                        android:textSize="10dp"
+                        android:layout_marginLeft="50dp"
+                        />
+                    <TextView
+                        android:id="@+id/good_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:text="库存：5件"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
 
 
             </LinearLayout>
