@@ -13,8 +13,8 @@ public class Action implements Serializable {
     private String activityQQ;
     private String startTime;
     private String endTime;
-    private int activityNeedPeopleNumber;
-    private int	activityJoinPeoleNumber;
+    private String activityNeedPeopleNumber;
+    private String 	activityJoinPeoleNumber;
     private String activityDetail;
     private String status;
 
@@ -82,19 +82,19 @@ public class Action implements Serializable {
         this.endTime = endTime;
     }
 
-    public int getActivityNeedPeopleNumber() {
+    public String getActivityNeedPeopleNumber() {
         return activityNeedPeopleNumber;
     }
 
-    public void setActivityNeedPeopleNumber(int activityNeedPeopleNumber) {
+    public void setActivityNeedPeopleNumber(String activityNeedPeopleNumber) {
         this.activityNeedPeopleNumber = activityNeedPeopleNumber;
     }
 
-    public int getActivityJoinPeoleNumber() {
+    public String getActivityJoinPeoleNumber() {
         return activityJoinPeoleNumber;
     }
 
-    public void setActivityJoinPeoleNumber(int activityJoinPeoleNumber) {
+    public void setActivityJoinPeoleNumber(String activityJoinPeoleNumber) {
         this.activityJoinPeoleNumber = activityJoinPeoleNumber;
     }
 

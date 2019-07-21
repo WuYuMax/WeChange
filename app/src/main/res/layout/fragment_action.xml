@@ -4,43 +4,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/holo_blue_light"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="活动"
-                    android:textSize="20dp"
-                    android:textColor="@android:color/white"
-                    />
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="@drawable/logo"
-                    />
-            </RelativeLayout>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/action_reyecler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-            </android.support.v7.widget.RecyclerView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/holo_blue_light">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="sdflsdkfjlsdkfjsldkfjsldkf "
-                />
-        </LinearLayout>
+                android:layout_centerInParent="true"
+                android:text="活动"
+                android:textColor="@android:color/white"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/logo" />
+
+            <Button
+                android:id="@+id/action_Add"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/ic_add_black_24dp" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/action_reyecler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sdflsdkfjlsdkfjsldkfjsldkf " />
+    </LinearLayout>
 
 </LinearLayout>

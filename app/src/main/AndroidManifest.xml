@@ -19,6 +19,7 @@
                 android:resource="@xml/file_paths"
                 ></meta-data>
         </provider>
+        <activity android:name=".Action.ActionReleaseActivity"></activity>
         <activity android:name=".Action.ActionShowActivity"></activity>
         <activity android:name=".Shop.ReleaseActivity"></activity>
         <activity android:name=".Shop.TheGoodListAcitivity"></activity>

@@ -11,6 +11,8 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.a33206.wechange.Adapt.ActivityAdapt;
 import com.example.a33206.wechange.R;
@@ -22,6 +24,7 @@ import java.util.List;
 
 public class ActionFragment extends Fragment {
     private RecyclerView recyclerView;
+    private Button addbutton;
     private ActivityAdapt activityAdapt;
     private List<User> userList= new ArrayList<>();
     private List<Action> actionList= new ArrayList<>();
@@ -30,11 +33,19 @@ public class ActionFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_action,container,false);
         recyclerView=view.findViewById(R.id.action_reyecler);
+        addbutton = view.findViewById(R.id.action_Add);
         initList();
         activityAdapt=new ActivityAdapt(userList,actionList,getActivity(),R.drawable.logo);
         StaggeredGridLayoutManager layoutManager =new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(activityAdapt);
+        addbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ActionReleaseActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -51,8 +62,8 @@ public class ActionFragment extends Fragment {
                 "3、完成工作交接：上届部长级成员传授工作中的经验教训及工作方法并在实际工作开展中给予新一届部长级成员支持与帮助。\n" +
                 "4、笔试主要测试报名同学对竞职岗位和学生组织章程的了解程度、统筹能力、细节思考能力等。\n" +
                 "5、答辩主要体现竞选同学对于竞选职位的理解以及工作规划，同时还考验竞选同学的语言表达能力和应变能力。演讲内容应至少包括自我介绍、职务理解、个人工作陈述等方面，评委将主要从演讲态度、演讲内容、演讲能力和问题答辩情况这四个方面进行打分。");
-        action.setActivityNeedPeopleNumber(10);
-        action.setActivityJoinPeoleNumber(9);
+        action.setActivityNeedPeopleNumber("10");
+        action.setActivityJoinPeoleNumber("9");
         action.setStartTime("2019-3-11");
         action.setEndTime("3-15");
         for (int i=0;i<4;i++) {
@@ -64,6 +75,5 @@ public class ActionFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
     }
 }
