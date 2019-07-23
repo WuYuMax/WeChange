@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.a33206.wechange.BlockActivity;
 import com.example.a33206.wechange.LoginActivity;
 import com.example.a33206.wechange.R;
@@ -60,10 +61,10 @@ public class GoodAdapt extends RecyclerView.Adapter<GoodAdapt.ViewHolder> {
 
 //        Log.e("-------------->", mgoodsList.get(i).getPictures().get(0)+"" );
         final Goods goods = mgoodsList.get(i);
-        if (mgoodsList.get(i).getPictures().size()==0){
+        if (mgoodsList.get(i).getPictures()==null){
             viewHolder.good_pi.setImageResource(R.drawable.logo);
         }else {
-            viewHolder.good_pi.setImageResource(goods.getPictures().get(0));
+            Glide.with(context).load(mgoodsList.get(i).getPictures()).into(viewHolder.good_pi);
         }
         if (goods.getNumber()==0) {
             viewHolder.good_numbe.setText("售罄");
@@ -82,6 +83,7 @@ public class GoodAdapt extends RecyclerView.Adapter<GoodAdapt.ViewHolder> {
                 }else {
                     Intent intent = new Intent(context, BlockActivity.class);
                     intent.putExtra("good", goods);
+                    intent.putExtra("goodId",goods.getGood_Id());
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }

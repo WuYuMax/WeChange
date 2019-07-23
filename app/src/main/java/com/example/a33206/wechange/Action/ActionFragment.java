@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,12 +32,16 @@ public class ActionFragment extends Fragment {
     private ActivityAdapt activityAdapt;
     private List<User> userList= new ArrayList<>();
     private List<Action> actionList= new ArrayList<>();
+    private Button drawerbutton;
+    private DrawerLayout drawerLayout;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_action,container,false);
         recyclerView=view.findViewById(R.id.action_reyecler);
         addbutton = view.findViewById(R.id.action_Add);
+        drawerbutton=view.findViewById(R.id.drawer_button);
+        drawerLayout=view.findViewById(R.id.action_drawer);
         initList();
         activityAdapt=new ActivityAdapt(userList,actionList,getActivity(),R.drawable.logo);
         StaggeredGridLayoutManager layoutManager =new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL);
@@ -75,5 +83,6 @@ public class ActionFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
     }
 }

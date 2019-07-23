@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_1"
+            android:icon="@drawable/logo"
+            android:title="收藏夹"></item>
+        <item
+            android:id="@+id/nav_2"
+            android:icon="@drawable/logo"
+            android:title="浏览历史"
+            ></item>
+        <item
+            android:id="@+id/nav_3"
+            android:title="我的交易"
+            android:icon="@drawable/logo"
+            ></item>
+    </group>
+</menu>

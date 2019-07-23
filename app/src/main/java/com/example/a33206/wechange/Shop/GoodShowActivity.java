@@ -16,6 +16,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.a33206.wechange.Adapt.GlideImageLoader;
 import com.example.a33206.wechange.Adapt.GoodAdapt;
 import com.example.a33206.wechange.R;
@@ -37,9 +38,10 @@ public class GoodShowActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GoodAdapt adapt;
     private List<Goods> datalist =new ArrayList<>();
-    private Banner good_banner;
+    private ImageView good_banner;
     private ScrollView scrollView;
     private boolean isLike=false;
+    private boolean istest=false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,14 +54,15 @@ public class GoodShowActivity extends AppCompatActivity {
         good_know = findViewById(R.id.show_good_know);
         telButton = findViewById(R.id.like);
         recyclerView =findViewById(R.id.showgood_recycle);
-        good_banner =findViewById(R.id.show_good_banner);
+        good_banner =findViewById(R.id.show_good_image);
         scrollView = findViewById(R.id.show_good_scroll);
         user_tel=findViewById(R.id.tel);
         scrollView.scrollTo(0,0);
+        istest=getIntent().getBooleanExtra("test",false);
         initLayout();
         initList();
 
-        if (getIntent().getBooleanExtra("test",true)) {
+        if (!istest) {
             initRecycle();
         }
     }
@@ -80,16 +83,19 @@ public class GoodShowActivity extends AppCompatActivity {
         good_name.setText(goods.getGood_name());
         good_know.setText(goods.getCommit());
         final Goods finalGoods = goods;
+        final Goods finalGoods1 = goods;
         telButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!isLike){
-                    Toast.makeText(GoodShowActivity.this,"已加入想要列表,联系方式(qq)已显示",Toast.LENGTH_SHORT).show();
-                    user_tel.setText(finalGoods.getUser_Id());
+                    Toast.makeText(GoodShowActivity.this,"已加入想要列表",Toast.LENGTH_SHORT).show();
+                    if (istest){
+                        user_tel.setText(finalGoods1.getUser_Id());
+                    }
                     telButton.setText("取消");
                     isLike=true;
                 }else {
-                    Toast.makeText(GoodShowActivity.this,"已退出想要列表，联系方式(qq)隐藏",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GoodShowActivity.this,"已退出想要列表",Toast.LENGTH_SHORT).show();
                     telButton.setText("想要");
                     user_tel.setText("（联系方式(qq)）");
                     isLike=false;
@@ -98,20 +104,11 @@ public class GoodShowActivity extends AppCompatActivity {
             }
         });
 
-        if (goods.getPictures().size()!=0) {
-            good_banner.setImageLoader(new GlideImageLoader());
-            good_banner.setImages(goods.getPictures());
-            good_banner.start();
-        }else if (goods.getBytes().size()!=0){
-            List<Uri> uriList =new ArrayList<>();
-            good_banner.setImageLoader(new GlideImageLoader());
-            for (byte[] bytes:goods.getBytes()){
-                Bitmap bitmap =BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-                Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null,null));
-                uriList.add(uri);
-            }
-            good_banner.setImages(uriList);
-            good_banner.start();
+        if (!istest) {
+            Glide.with(GoodShowActivity.this).load(goods.getPictures()).into(good_banner);
+        }else {
+            byte[] bytes = goods.getTextPic();
+            Glide.with(GoodShowActivity.this).load(bytes).into(good_banner);
         }
     }
 

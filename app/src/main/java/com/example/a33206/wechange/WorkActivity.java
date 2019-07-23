@@ -13,6 +13,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.a33206.wechange.Action.ActionFragment;
 import com.example.a33206.wechange.Adapt.ViewPagerAdapt;
+import com.example.a33206.wechange.My.MyFragment;
 import com.example.a33206.wechange.Shop.ShopFragment;
 
 import java.util.ArrayList;
@@ -28,11 +29,14 @@ public class WorkActivity extends AppCompatActivity {
     private List<Fragment> fragmentList=new ArrayList<Fragment>();
     private ViewPager viewPager;
     private PagerAdapter viewpager_adapt;
+    private String userId;
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work);
         //实例化
+        userId = getIntent().getStringExtra("userId");
+
         shopFragment = new ShopFragment();
         actionFragment = new ActionFragment();
         myFragment = new MyFragment();
@@ -90,8 +94,10 @@ public class WorkActivity extends AppCompatActivity {
                 .setBarBackgroundColor("#4a90d2")
                 .addItem(new BottomNavigationItem(R.drawable.shoppic,"商品市场"))
                 .addItem(new BottomNavigationItem(R.drawable.activitypic,"活动广场"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_remove_red_eye_white_24dp,"个人信息"))
+                .addItem(new BottomNavigationItem(R.drawable.memessage,"个人中心"))
                 .setFirstSelectedPosition(0)
                 .initialise();
+
     }
+
 }

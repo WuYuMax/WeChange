@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.a33206.wechange.BlockActivity;
 import com.example.a33206.wechange.LoginActivity;
 import com.example.a33206.wechange.R;
@@ -60,7 +61,7 @@ public class TheGoodAdapt extends RecyclerView.Adapter<TheGoodAdapt.ViewHolder> 
     public void onBindViewHolder(@NonNull TheGoodAdapt.ViewHolder viewHolder, final int i) {
         final Goods goods = goodsList.get(i);
         viewHolder.goodprice.setText("￥ "+goods.getGood_price());
-        viewHolder.goodpic.setImageResource(goods.getPictures().get(0));
+        Glide.with(context).load(goods.getPictures()).into(viewHolder.goodpic);
         viewHolder.goodname.setText(goods.getGood_name());
         viewHolder.goodknow.setText(goods.getCommit());
        // viewHolder.goodlike.setText(goods.getLikenumber()+"人想要");

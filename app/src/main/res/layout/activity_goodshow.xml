@@ -38,12 +38,16 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         >
-        <com.youth.banner.Banner
-            android:id="@+id/show_good_banner"
+        <ImageView
+            android:id="@+id/show_good_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:minHeight="150dp"
+            android:minWidth="400dp"
+            android:adjustViewBounds="true"
+            >
 
-        </com.youth.banner.Banner>
+        </ImageView>
 
     </RelativeLayout>
         <RelativeLayout

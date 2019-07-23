@@ -9,9 +9,18 @@ public class User implements Serializable {
     private String useraccount;
     private String password;
     private String phone;
-    private URL useIconUrl;
+    private String useIconUrl;
     private int successAmount;
     private String QQ;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getUserId() {
         return userId;
@@ -53,11 +62,11 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public URL getUseIconUrl() {
+    public String getUseIconUrl() {
         return useIconUrl;
     }
 
-    public void setUseIconUrl(URL useIconUrl) {
+    public void setUseIconUrl(String useIconUrl) {
         this.useIconUrl = useIconUrl;
     }
 

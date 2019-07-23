@@ -22,9 +22,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.a33206.wechange.R;
 import com.example.a33206.wechange.Shop.ReleaseActivity;
 import com.example.a33206.wechange.db.Action;
@@ -47,10 +49,10 @@ public class ActionReleaseActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TextView pre_look;
     private Button release;
-    private Button addpic;
-    private Action  action;
+    private ImageView actionpic;
+    private Action  action=new Action();
     private User user;
-    private List<byte[]> bytes;
+    private byte[] bytes;
     final int CHOOSE_PHOTO = 2;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,11 +65,9 @@ public class ActionReleaseActivity extends AppCompatActivity {
         neednumber = findViewById(R.id.activity_release_neednumber);
         address = findViewById(R.id.activity_release_address);
         detail = findViewById(R.id.activity_release_detail);
-        recyclerView= findViewById(R.id.activity_release_pics);
         pre_look = findViewById(R.id.activity_release_prelook);
         release = findViewById(R.id.activity_release_button);
-        addpic = findViewById(R.id.activity_release_addpic);
-
+        actionpic=findViewById(R.id.activity_release_pic);
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,10 +75,12 @@ public class ActionReleaseActivity extends AppCompatActivity {
             }
         });
 
-        addpic.setOnClickListener(new View.OnClickListener() {
+        actionpic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setURiFormALbum();
 
+//                action.setTextPic(bytes);
             }
         });
         pre_look.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +90,7 @@ public class ActionReleaseActivity extends AppCompatActivity {
                 Intent intent = new Intent(ActionReleaseActivity.this,ActionShowActivity.class);
                 intent.putExtra("activity",action);
                 intent.putExtra("user",user);
-                intent.putExtra("pic",R.drawable.logo);
+                intent.putExtra("test",true);
                 startActivity(intent);
 
             }
@@ -96,7 +98,6 @@ public class ActionReleaseActivity extends AppCompatActivity {
     }
 
     private void initaction() {
-        action = new Action();
         action.setActivityName(activity_name.getText().toString());
         action.setEndTime(enddate.getText().toString());
         action.setStartTime(startdata.getText().toString());
@@ -183,9 +184,9 @@ public class ActionReleaseActivity extends AppCompatActivity {
     private void displayImage(String imagePath) {
         if (imagePath!=null){
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            Uri uri=Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null,null));
-            List<URL> urls= new ArrayList<>();
-            bytes.add(Bitmap2Bytes(bitmap));
+            bytes=Bitmap2Bytes(bitmap);
+            action.setTextPic(bytes);
+            Glide.with(ActionReleaseActivity.this).load(bytes).into(actionpic);
         }else {
             Toast.makeText(ActionReleaseActivity.this,"大哥不会把，连图库也没有",Toast.LENGTH_SHORT);
         }
@@ -210,7 +211,7 @@ public class ActionReleaseActivity extends AppCompatActivity {
     }
     private byte[] Bitmap2Bytes(Bitmap bm){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bm.compress(Bitmap.CompressFormat.JPEG, 40, baos);
         return baos.toByteArray();
     }
 }

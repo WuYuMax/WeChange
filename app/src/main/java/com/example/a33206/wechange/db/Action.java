@@ -17,6 +17,15 @@ public class Action implements Serializable {
     private String 	activityJoinPeoleNumber;
     private String activityDetail;
     private String status;
+    private byte[] TextPic;
+
+    public byte[] getTextPic() {
+        return TextPic;
+    }
+
+    public void setTextPic(byte[] textPic) {
+        TextPic = textPic;
+    }
 
     public String getActivityId() {
         return activityId;

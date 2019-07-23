@@ -129,20 +129,13 @@
                         />
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/activity_release_pics"
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp">
-                        </android.support.v7.widget.RecyclerView>
+                        android:layout_height="75dp">
+                        <ImageView
+                            android:id="@+id/activity_release_pic"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:background="@drawable/ic_add_black_24dp"/>
 
-                        <Button
-                            android:id="@+id/activity_release_addpic"
-                            android:layout_marginLeft="15dp"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@drawable/ic_add_black_24dp"
-                            />
                     </LinearLayout>
 
                 </LinearLayout>

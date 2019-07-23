@@ -2,6 +2,8 @@ package com.example.a33206.wechange.Adapt;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.a33206.wechange.Action.ActionShowActivity;
+import com.example.a33206.wechange.LoginActivity;
 import com.example.a33206.wechange.R;
 import com.example.a33206.wechange.db.Action;
 import com.example.a33206.wechange.db.User;
@@ -25,7 +28,7 @@ public class ActivityAdapt extends RecyclerView.Adapter<ActivityAdapt.ViewHold> 
     private List<Action> actionList;
     private Context context;
     private int picaddress;
-
+    private SharedPreferences prefs;
     public ActivityAdapt(List<User> userList, List<Action> actionList, Context context, int picaddress) {
         this.userList = userList;
         this.actionList = actionList;
@@ -60,12 +63,18 @@ public class ActivityAdapt extends RecyclerView.Adapter<ActivityAdapt.ViewHold> 
         holdView.collect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,ActionShowActivity.class);
-                intent.putExtra("ActionId",action.getActivityId());
-                intent.putExtra("activity",action);
-                intent.putExtra("user",user);
-                intent.putExtra("pic",R.drawable.logo);
-                context.startActivity(intent);
+                SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context);
+                if (!prefs.getBoolean("status",false)){
+                    Intent intent = new Intent(context,LoginActivity.class);
+                    context.startActivity(intent);
+                }else {
+                    Intent intent = new Intent(context, ActionShowActivity.class);
+                    intent.putExtra("ActionId", action.getActivityId());
+                    intent.putExtra("activity", action);
+                    intent.putExtra("user", user);
+                    intent.putExtra("pic", R.drawable.logo);
+                    context.startActivity(intent);
+                }
             }
         });
     }
@@ -95,7 +104,6 @@ public class ActivityAdapt extends RecyclerView.Adapter<ActivityAdapt.ViewHold> 
             action_data=itemView.findViewById(R.id.activity_data);
             collect=itemView.findViewById(R.id.jion);
             action_name=itemView.findViewById(R.id.action_name);
-
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.a33206.wechange.Action;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -33,8 +34,9 @@ public class ActionShowActivity extends AppCompatActivity {
     private TextView activity_enddata;
     private TextView activitylike_button;
     private TextView activity_jion;
-    private Banner banner;
+    private ImageView activity_pic;
     private Button backbutton;
+    private SwipeRefreshLayout refreshLayout;
 
     private User user;
     private Action action;
@@ -54,9 +56,16 @@ public class ActionShowActivity extends AppCompatActivity {
         activity_needpeople= findViewById(R.id.activity_need_number);
         activitylike_button= findViewById(R.id.activity_show_like_button);
         activity_jion= findViewById(R.id.activity_show_jion_button);
-        banner= findViewById(R.id.activity_show_banner);
+        activity_pic= findViewById(R.id.activity_show_pic);
         backbutton=findViewById(R.id.activity_show_back);
+        refreshLayout=findViewById(R.id.action_show_swip);
         initLayout();
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initLayout();
+            }
+        });
     }
 
     private void initLayout() {
@@ -75,10 +84,7 @@ public class ActionShowActivity extends AppCompatActivity {
         activity_qq.setText(user.getQQ());
         List<Integer> imagelist = new ArrayList<>();
         imagelist.add(R.drawable.logo);
-
-        banner.setImageLoader(new GlideImageLoader());
-        banner.setImages(imagelist);
-        banner.start();
+        Glide.with(ActionShowActivity.this).load(action.getTextPic()).into(activity_pic);
 
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,5 +92,6 @@ public class ActionShowActivity extends AppCompatActivity {
                 finish();
             }
         });
+        refreshLayout.setRefreshing(false);
     }
 }

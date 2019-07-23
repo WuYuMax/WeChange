@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.ContentUris;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
@@ -12,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -26,10 +28,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.a33206.wechange.Adapt.ReleaseGoodAdapt;
 import com.example.a33206.wechange.R;
 import com.example.a33206.wechange.db.Goods;
@@ -51,13 +56,16 @@ public class ReleaseActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ReleaseGoodAdapt releaseGoodAdapt;
     private List<Uri> uriList = new ArrayList<>();
-    private Button addpicButton;
+    private ImageView addpicButton;
     private Uri imageuri;
     private List<Bitmap> bitmaps = new ArrayList<>();
     final int TAKE_PHOTO = 1;
     final int CHOOSE_PHOTO = 2;
     private int PhotoCurrent;
     private List<String> namelist =new ArrayList<>();
+
+    private static Bitmap bit=null;
+
     private Button phonebutton;
     private Button bookbutton;
     private Button gamebutton;
@@ -68,7 +76,7 @@ public class ReleaseActivity extends AppCompatActivity {
     private Button otherbutton;
     private TextView typename;
     private String goodtype;
-    private List<byte[]> bytes =new ArrayList<>();
+    private byte[] bytes;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +87,6 @@ public class ReleaseActivity extends AppCompatActivity {
         good_price = findViewById(R.id.release_goodprice);
         good_kind = findViewById(R.id.release_kind);
         pre_lookbutton = findViewById(R.id.release_prelook);
-        recyclerView = findViewById(R.id.release_imageRecycly);
         addpicButton = findViewById(R.id.release_addpic_button);
         phonebutton=findViewById(R.id.release_phone_button);
         bookbutton=findViewById(R.id.release_book_button);
@@ -92,6 +99,7 @@ public class ReleaseActivity extends AppCompatActivity {
         typename=findViewById(R.id.release_type_text);
         initNameList();
 
+        bytes = new byte[1024*1024];
         getname(phonebutton,0);
         getname(bookbutton,1);
         getname(gamebutton,2);
@@ -105,11 +113,6 @@ public class ReleaseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setURiFormALbum();
-                releaseGoodAdapt = new ReleaseGoodAdapt(ReleaseActivity.this, uriList, bitmaps, PhotoCurrent);
-                LinearLayoutManager layoutManager = new LinearLayoutManager(ReleaseActivity.this);
-                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                recyclerView.setAdapter(releaseGoodAdapt);
-                recyclerView.setLayoutManager(layoutManager);
             }
         });
         pre_lookbutton.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +122,8 @@ public class ReleaseActivity extends AppCompatActivity {
                 goods = initGood();
                 Intent intent = new Intent(ReleaseActivity.this, GoodShowActivity.class);
                 intent.putExtra("good", goods);
-                intent.putExtra("test", false);
+                intent.putExtra("test", true);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
         });
@@ -241,7 +245,8 @@ public class ReleaseActivity extends AppCompatActivity {
     private void displayImage(String imagePath) {
         if (imagePath!=null){
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            bytes.add(Bitmap2Bytes(bitmap));
+            Glide.with(ReleaseActivity.this).load(Bitmap2Bytes(bitmap)).into(addpicButton);
+            bytes=Bitmap2Bytes(bitmap);Toast.makeText(ReleaseActivity.this,"注意：由于文件大小问题，5Mb以上的照片不提供预览",Toast.LENGTH_SHORT).show();
             PhotoCurrent = 2;
         }else {
             Toast.makeText(ReleaseActivity.this,"大哥不会把，连图库也没有",Toast.LENGTH_SHORT);
@@ -286,13 +291,11 @@ public class ReleaseActivity extends AppCompatActivity {
 
     private Goods initGood() {
         Goods goods = new Goods();
-        List<Integer> list = new ArrayList<>();
         List<Uri> uriL=uriList;
         goods.setGood_name(good_name.getText().toString());
         goods.setGood_price(good_price.getText().toString());
         goods.setCommit(good_know.getText().toString());
-        goods.setPictures(list);
-        goods.setBytes(bytes);
+        goods.setTextPic(bytes);
         goods.setGood_type(goodtype);
         return goods;
     }
@@ -311,7 +314,7 @@ public class ReleaseActivity extends AppCompatActivity {
         }
     private byte[] Bitmap2Bytes(Bitmap bm){
              ByteArrayOutputStream baos = new ByteArrayOutputStream();
-             bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+             bm.compress(Bitmap.CompressFormat.JPEG, 40, baos);
              return baos.toByteArray();
           }
 }
