@@ -7,12 +7,17 @@
         android:layout_height="match_parent"
         android:background="#ceffe6"
         >
-        <android.support.v7.widget.RecyclerView
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/item_swip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
             android:id="@+id/show_good_item_recycle"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         </android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
 </LinearLayout>

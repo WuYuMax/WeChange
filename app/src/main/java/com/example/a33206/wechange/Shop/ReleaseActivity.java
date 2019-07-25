@@ -25,6 +25,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,12 +40,23 @@ import com.example.a33206.wechange.Adapt.ReleaseGoodAdapt;
 import com.example.a33206.wechange.R;
 import com.example.a33206.wechange.db.Goods;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ReleaseActivity extends AppCompatActivity {
     private Button deletebutton;
@@ -53,6 +65,7 @@ public class ReleaseActivity extends AppCompatActivity {
     private EditText good_price;
     private EditText good_kind;
     private TextView pre_lookbutton;
+    private Button release_button;
     private RecyclerView recyclerView;
     private ReleaseGoodAdapt releaseGoodAdapt;
     private List<Uri> uriList = new ArrayList<>();
@@ -76,6 +89,7 @@ public class ReleaseActivity extends AppCompatActivity {
     private Button otherbutton;
     private TextView typename;
     private String goodtype;
+    private String address="http://140.143.224.210:8080/market/product/add";
     private byte[] bytes;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,6 +111,7 @@ public class ReleaseActivity extends AppCompatActivity {
         jiajvbutton=findViewById(R.id.release_jiajv_button);
         otherbutton=findViewById(R.id.release_other_button);
         typename=findViewById(R.id.release_type_text);
+        release_button=findViewById(R.id.good_release_button);
         initNameList();
 
         bytes = new byte[1024*1024];
@@ -131,6 +146,56 @@ public class ReleaseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        release_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                torelease();
+            }
+        });
+    }
+
+    private void torelease() {
+        SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(ReleaseActivity.this);
+        String UseId = prefs.getString("userId","1");
+        OkHttpClient client =new OkHttpClient();
+        RequestBody requestBody = new FormBody.Builder()
+                .add("userId",UseId)
+                .add("productName",good_name.getText().toString())
+                .add("productPrice",good_price.getText().toString())
+                .add("productStock",good_kind.getText().toString())
+                .add("productIcon","https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1519390769,3263130287&fm=27&gp=0.jpg")
+                .add("productDetail",good_know.getText().toString())
+                .build();
+        Request request =new Request.Builder().url(address).post(requestBody).build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String data =response.body().string();
+                try {
+                    final JSONObject jsonObject1=new JSONObject(data);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                String ans = (String) jsonObject1.get("msg");
+                                Log.e("------>",ans);
+                                Toast.makeText(ReleaseActivity.this, ans,Toast.LENGTH_LONG).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

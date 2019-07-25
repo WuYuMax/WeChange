@@ -21,18 +21,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //配件设定部分
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                Time_Limit--;
-                Intent intent = new Intent(MainActivity.this,WorkActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        };
+        SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        if (prefs.getBoolean("status",false)){
+            Intent intent = new Intent(MainActivity.this,WorkActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    Time_Limit--;
+                    Intent intent = new Intent(MainActivity.this,WorkActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            };
 
 
             time.schedule(task,2000);
+        }
+
         }
 
     }

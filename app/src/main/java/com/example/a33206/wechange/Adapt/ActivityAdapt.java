@@ -18,10 +18,13 @@ import com.example.a33206.wechange.Action.ActionShowActivity;
 import com.example.a33206.wechange.LoginActivity;
 import com.example.a33206.wechange.R;
 import com.example.a33206.wechange.db.Action;
+import com.example.a33206.wechange.db.Goods;
 import com.example.a33206.wechange.db.User;
 
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ActivityAdapt extends RecyclerView.Adapter<ActivityAdapt.ViewHold> {
     private List<User> userList;
@@ -50,9 +53,9 @@ public class ActivityAdapt extends RecyclerView.Adapter<ActivityAdapt.ViewHold> 
     public void onBindViewHolder(@NonNull ViewHold holdView, final int i) {
         final User user = userList.get(i);
         final Action action = actionList.get(i);
-        Glide.with(context).load(R.drawable.logo).into(holdView.user_pic);
+//        Glide.with(context).load(R.drawable.logo).into(holdView.user_pic);
 //        Glide.with(context).load(user.getUseIconUrl()).into(holdView.user_pic);
-        holdView.user_pic.setImageResource(picaddress);
+        Glide.with(context).load(user.getUseIconUrl()).into(holdView.user_pic);
         holdView.user_name.setText(user.getUserName());
         holdView.action_data.setText("报名截止日期："+action.getEndTime());
         holdView.action_detail.setText(action.getActivityDetail());
@@ -84,8 +87,14 @@ public class ActivityAdapt extends RecyclerView.Adapter<ActivityAdapt.ViewHold> 
         return userList.size();
     }
 
+    public void FreshHeaderItem(){
+        userList.clear();
+        actionList.clear();
+        notifyDataSetChanged();
+
+    }
     public class ViewHold extends RecyclerView.ViewHolder {
-        private ImageView user_pic;
+        private CircleImageView user_pic;
         private TextView user_name;
         private TextView action_push_data;
         private TextView action_detail;

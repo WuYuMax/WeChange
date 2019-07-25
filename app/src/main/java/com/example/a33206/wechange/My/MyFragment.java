@@ -31,21 +31,26 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.Response;
 
 public class MyFragment extends Fragment {
     private TextView user_name;
     private Button degister_button;
+    private TextView my_change;
     private TextView my_collect;
     private TextView my_message;
     private TextView my_name;
+    private TextView my_action;
     private CircleImageView circleImageView;
-    private String address="http://www.codeskystar.cn:8080/market/user/my?userid=";
+    private String address="http://140.143.224.210:8080/market/user/my?userid=";
+    private String logoutaddress="http://140.143.224.210:8080/market/user/logout";
     private String userId;
     private String data;
     private String Myname;
@@ -68,10 +73,13 @@ public class MyFragment extends Fragment {
         degister_button=view.findViewById(R.id.my_degister_button);
         my_collect=view.findViewById(R.id.my_collect);
         my_message=view.findViewById(R.id.my_message);
+        my_change=view.findViewById(R.id.my_change);
         my_name=view.findViewById(R.id.my_name);
+        my_action=view.findViewById(R.id.my_action);
         circleImageView = view.findViewById(R.id.my_user_pic);
         initLayout();
-        if (Mypic.equals("null")){
+
+        if (Mypic=="null"){
             getByIntent();
         }
         else{
@@ -98,13 +106,38 @@ public class MyFragment extends Fragment {
 
             }else {
             userId=prefs.getString("userId","0");
-
+            my_action.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent =new Intent(getActivity(),MyActivity.class);
+                    startActivity(intent);
+                }
+            });
+            my_change.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent =new Intent(getActivity(),MyGoodList.class);
+                    intent.putExtra("UserId",userId);
+                    startActivity(intent);
+                }
+            });
             my_message.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(),MyMessageActivity.class);
                     intent.putExtra("UserId",userId);
+                    intent.putExtra("isme",true);
                     startActivity(intent);
+                }
+            });
+            circleImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(),MyMessageActivity.class);
+                    intent.putExtra("UserId",userId);
+                    intent.putExtra("isme",true);
+                    startActivity(intent);
+
                 }
             });
             my_collect.setOnClickListener(new View.OnClickListener() {
@@ -120,17 +153,35 @@ public class MyFragment extends Fragment {
                             .edit();
                     editor.putBoolean("status",false);
                     editor.apply();
-                    Toast.makeText(getActivity(),"您已安全注销",Toast.LENGTH_SHORT).show();
                     user_name.setText("请优先登录您的账号");
                     Glide.with(getActivity()).load(R.drawable.logo).into(circleImageView);
                     degister_button.setText("登录");
-                    Mypic="null";
+                    Mypic=null;
+
                     degister_button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(getActivity(),LoginActivity.class);
                             startActivity(intent);
                             getActivity().finish();
+                        }
+                    });
+                    OkHttpClient client =new OkHttpClient();
+                    Request request = new Request.Builder().url(logoutaddress).build();
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(),"您已安全注销",Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                     });
                 }
@@ -161,13 +212,15 @@ public class MyFragment extends Fragment {
                                 Myname="您好！"+jsonObject1.get("userName").toString();
                                 Log.e("-------------------->",Myname);
                                 my_name.setText(Myname);
-                                Mypic=jsonObject1.get("userIcon").toString();
-                                Glide.with(getActivity()).load(Mypic).into(circleImageView);
+                                Mypic=jsonObject1.getString("userIcon");
+                                Log.e("-------------------->",jsonObject1.get("userIcon").toString());
+                                Glide.with(getActivity()).load(Mypic.getBytes()).into(circleImageView);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
-                    });
+                    });//[B@5ef3a37
+                    //[B@5ef3a37
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -180,7 +233,7 @@ public class MyFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Mypic="null";
+        Mypic=null;
         Myname="sdf";
     }
 

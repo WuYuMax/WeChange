@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button register_button;
     private Button back_button;
 
-    private String address1="127.0.0.1:8080/market/user/register?useraccount=";
+    private String address1="http://140.143.224.210:8080/market/user/register";
     private String address2="&username=";
     private String address3="&userpassword=";
     private String address4="&userphone=";
@@ -89,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                             .add("userPhone",pre_phone)
                             .add("userQq",pre_qq)
                             .build();
-                    final Request request = new Request.Builder().url("http://www.codeskystar.cn:8080/market/user/register")
+                    final Request request = new Request.Builder().url("http://140.143.224.210:8080/market/user/register")
                             .post(requestBody)
                             .build();
                     client.newCall(request).enqueue(new Callback() {

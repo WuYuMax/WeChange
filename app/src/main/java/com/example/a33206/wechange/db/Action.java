@@ -7,16 +7,16 @@ import java.util.List;
 public class Action implements Serializable {
     private String activityId;
     private String activityName;
-    private List<URL> activityIcon;
+    private List<String> activityIcon;
     private	String activityAddress;
     private String userId;
     private String activityQQ;
     private String startTime;
     private String endTime;
-    private String activityNeedPeopleNumber;
-    private String 	activityJoinPeoleNumber;
+    private int activityNeedPeopleNumber;
+    private int 	activityJoinPeoleNumber;
     private String activityDetail;
-    private String status;
+    private int status;
     private byte[] TextPic;
 
     public byte[] getTextPic() {
@@ -43,11 +43,11 @@ public class Action implements Serializable {
         this.activityName = activityName;
     }
 
-    public List<URL> getActivityIcon() {
+    public List<String> getActivityIcon() {
         return activityIcon;
     }
 
-    public void setActivityIcon(List<URL> activityIcon) {
+    public void setActivityIcon(List<String> activityIcon) {
         this.activityIcon = activityIcon;
     }
 
@@ -91,19 +91,19 @@ public class Action implements Serializable {
         this.endTime = endTime;
     }
 
-    public String getActivityNeedPeopleNumber() {
+    public int getActivityNeedPeopleNumber() {
         return activityNeedPeopleNumber;
     }
 
-    public void setActivityNeedPeopleNumber(String activityNeedPeopleNumber) {
+    public void setActivityNeedPeopleNumber(int activityNeedPeopleNumber) {
         this.activityNeedPeopleNumber = activityNeedPeopleNumber;
     }
 
-    public String getActivityJoinPeoleNumber() {
+    public int getActivityJoinPeoleNumber() {
         return activityJoinPeoleNumber;
     }
 
-    public void setActivityJoinPeoleNumber(String activityJoinPeoleNumber) {
+    public void setActivityJoinPeoleNumber(int activityJoinPeoleNumber) {
         this.activityJoinPeoleNumber = activityJoinPeoleNumber;
     }
 
@@ -115,11 +115,11 @@ public class Action implements Serializable {
         this.activityDetail = activityDetail;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }

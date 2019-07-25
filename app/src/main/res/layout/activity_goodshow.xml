@@ -6,12 +6,17 @@
     android:orientation="vertical"
     android:focusableInTouchMode="true"
     >
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/good_show_swip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ScrollView
         android:id="@+id/show_good_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,8 +59,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#fff"
+            android:id="@+id/good_user"
             >
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_pic"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -84,7 +90,6 @@
                 android:textColor="@android:color/holo_blue_light"
                 />
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="库存:0件"
@@ -173,5 +178,6 @@
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
     </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

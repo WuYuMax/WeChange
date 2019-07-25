@@ -56,7 +56,10 @@ public class TheGoodAdapt extends RecyclerView.Adapter<TheGoodAdapt.ViewHolder> 
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
-
+    public void FreshHeaderItem(List<Goods> item){
+        goodsList.clear();
+        notifyDataSetChanged();
+    }
     @Override
     public void onBindViewHolder(@NonNull TheGoodAdapt.ViewHolder viewHolder, final int i) {
         final Goods goods = goodsList.get(i);

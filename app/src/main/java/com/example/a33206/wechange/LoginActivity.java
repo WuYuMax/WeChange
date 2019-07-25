@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView text;
     private String status;
     private String userId;
-    private String addressone="http://www.codeskystar.cn:8080/market/user/login?useraccount=";
+    private String addressone="http://140.143.224.210:8080/market/user/login?useraccount=";
     private  String addressother ="&userpassword=";
     private String address;
     @Override

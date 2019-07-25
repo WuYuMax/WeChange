@@ -19,6 +19,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,11 +33,23 @@ import com.example.a33206.wechange.Shop.ReleaseActivity;
 import com.example.a33206.wechange.db.Action;
 import com.example.a33206.wechange.db.User;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ActionReleaseActivity extends AppCompatActivity {
     private Button backbutton;
@@ -46,6 +59,8 @@ public class ActionReleaseActivity extends AppCompatActivity {
     private EditText neednumber;
     private EditText address;
     private EditText detail;
+    private String url="http://140.143.224.210:8080/market/activity/my?userid=";
+    private  String useId;
     private RecyclerView recyclerView;
     private TextView pre_look;
     private Button release;
@@ -68,6 +83,7 @@ public class ActionReleaseActivity extends AppCompatActivity {
         pre_look = findViewById(R.id.activity_release_prelook);
         release = findViewById(R.id.activity_release_button);
         actionpic=findViewById(R.id.activity_release_pic);
+        useId = getIntent().getStringExtra("userId");
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,22 +108,76 @@ public class ActionReleaseActivity extends AppCompatActivity {
                 intent.putExtra("user",user);
                 intent.putExtra("test",true);
                 startActivity(intent);
+            }
+        });
 
+        release.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ActionReleaseActivity.this,"发布开始",Toast.LENGTH_LONG).show();
+                initaction();
+                OkHttpClient client = new OkHttpClient();
+                RequestBody requestBody = new FormBody.Builder()
+                        .add("activityName",action.getActivityName())
+                        .add("activityIcon","https://baike.baidu.com/pic/篮球/123564/0/eaf81a4c510fd9f95a60d3832b2dd42a2934a4e1?fr=lemma&ct=single#aid=0&pic=eaf81a4c510fd9f95a60d3832b2dd42a2934a4e1")
+                        .add("activityAddress",action.getActivityAddress())
+                        .add("userId",useId)
+                        .add("startTime",action.getStartTime())
+                        .add("endTime",action.getEndTime())
+                        .add("needPeople",String.valueOf(action.getActivityNeedPeopleNumber()))
+                        .add("activityDetail",action.getActivityDetail())
+                        .build();
+                Log.e("<----------->",action.getActivityDetail() );
+                Request request =new Request.Builder().url(url).post(requestBody).build();
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        e.printStackTrace();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(ActionReleaseActivity.this,"请求失败",Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String data =response.body().string();
+                        try {
+                            final JSONObject jsonObject = new JSONObject(data);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        Toast.makeText(ActionReleaseActivity.this,jsonObject.get("msg").toString(),Toast.LENGTH_LONG).show();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                        Toast.makeText(ActionReleaseActivity.this,"接受失败",Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
             }
         });
     }
 
     private void initaction() {
+        action =new Action();
         action.setActivityName(activity_name.getText().toString());
         action.setEndTime(enddate.getText().toString());
         action.setStartTime(startdata.getText().toString());
-        action.setActivityNeedPeopleNumber(neednumber.getText().toString());
+        action.setActivityNeedPeopleNumber(Integer.parseInt(neednumber.getText().toString()));
         action.setActivityDetail(detail.getText().toString());
-        action.setActivityJoinPeoleNumber("0");
+        action.setActivityJoinPeoleNumber(0);
         action.setActivityAddress(address.getText().toString());
-        user = new User();
-        user.setUserName("学生会");
-        user.setQQ("332062922");
+
 
     }
     private void setURiFormALbum() {

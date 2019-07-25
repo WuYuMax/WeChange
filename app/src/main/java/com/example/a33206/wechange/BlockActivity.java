@@ -18,7 +18,7 @@ public class BlockActivity extends AppCompatActivity {
         goods = (Goods) getIntent().getSerializableExtra("good");
         Intent intent = new Intent(BlockActivity.this,GoodShowActivity.class);
         intent.putExtra("good",goods);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         finish();
     }

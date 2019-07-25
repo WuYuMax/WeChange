@@ -18,6 +18,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,12 +32,14 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.a33206.wechange.R;
 import com.example.a33206.wechange.Shop.ReleaseActivity;
+import com.example.a33206.wechange.WorkActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -62,9 +65,10 @@ public class MyMessageActivity extends AppCompatActivity {
     private Button  button;
     private String useId;
     private Uri uri;
+    private boolean isme;
     private byte[] bytes;
-    private String address="http://www.codeskystar.cn:8080/market/user/info?userid=";
-    private String addresschange="http://www.codeskystar.cn:8080/market/user/change";
+    private String address="http://140.143.224.210:8080/market/user/info?userid=";
+    private String addresschange="http://140.143.224.210:8080/market/user/change";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,10 +85,11 @@ public class MyMessageActivity extends AppCompatActivity {
         hideLayout=findViewById(R.id.my_message_hidelayout);
         changemessage_check=findViewById(R.id.my_message_changecheck);
         button=findViewById(R.id.my_message_button);
-
+        isme=getIntent().getBooleanExtra("isme",false);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(MyMessageActivity.this,"开始更改",Toast.LENGTH_LONG).show();
                 change();
             }
         });
@@ -103,11 +108,19 @@ public class MyMessageActivity extends AppCompatActivity {
                 }
             }
         });
+
+        if (!isme){
+            changemessage_check.setVisibility(View.GONE);
+        }
         initLayout();
         user_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setURiFormALbum();
+//                byte[] text= Base64.encode(bytes,Base64.DEFAULT);
+//                byte[] tent =Base64.decode(text,Base64.DEFAULT);
+////                Log.e("<-->", text );
+//                byte[] texx= Base64.decode();
                 Glide.with(MyMessageActivity.this).load(bytes).into(user_pic);
             }
         });
@@ -122,7 +135,7 @@ public class MyMessageActivity extends AppCompatActivity {
                 .add("userPhone",user_tel.getText().toString())
                 .add("userQq",user_qq.getText().toString())
                 .add("userId",useId)
-                .add("userIcon","https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1519390769,3263130287&fm=27&gp=0.jpg")
+                .add("userIcon", "null")
                 .build();
         Request request  = new Request.Builder().url(addresschange).post(requestBody).build();
         client.newCall(request).enqueue(new Callback() {
@@ -149,9 +162,11 @@ public class MyMessageActivity extends AppCompatActivity {
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(MyMessageActivity.this,"失败",Toast.LENGTH_LONG).show();
                 }
             }
         });
+
     }
 
     private void initLayout() {
@@ -174,14 +189,13 @@ public class MyMessageActivity extends AppCompatActivity {
                         public void run() {
                             try {
                                 Log.e("---------------->", object.get("userIcon").toString());
-
                                 user_account.setText(object.get("userAccount").toString());
                                 user_qq.setText(object.get("userQq").toString());
                                 user_name.setText(object.get("userName").toString());
                                 user_tel.setText(object.get("userPhone").toString());
                                 user_sussecc.setText(object.get("userSuccessAmount").toString());
                                 object.get("userPassword").toString();
-                                Glide.with(MyMessageActivity.this).load(object.get("userIcon")).into(user_pic);
+                                Glide.with(MyMessageActivity.this).load(object.getString("userIcon").getBytes()).into(user_pic);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

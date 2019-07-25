@@ -6,6 +6,15 @@
     android:background="#ceffe6"
     android:orientation="vertical"
     >
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/the_good_fresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -22,10 +31,12 @@
             android:textColor="@android:color/white"
             />
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/the_good_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
-</LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/the_good_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>

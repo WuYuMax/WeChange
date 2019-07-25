@@ -1,7 +1,9 @@
 package com.example.a33206.wechange.Shop;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -32,25 +34,41 @@ public class TheGoodListAcitivity extends AppCompatActivity {
     private List<Goods> goodsList=new ArrayList<>();
     private TheGoodAdapt theGoodAdapt;
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout refreshLayout;
     private int type;
-    private String address="http://www.codeskystar.cn:8080/market/app/type?producttype=";
+    private boolean isFresh=false;
+    private String address="http://140.143.224.210:8080/market/app/type?producttype=";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thegood);
         nametext =findViewById(R.id.the_good_name);
         recyclerView =findViewById(R.id.the_good_recycler);
+        refreshLayout = findViewById(R.id.the_good_fresh);
         type=getIntent().getIntExtra("type",8);
         initNameList();
-        initGoodList();
-
+        initGoodList(false);
+        recyclerView.setAdapter(theGoodAdapt);
         StaggeredGridLayoutManager layoutManager =new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+
+                    public void run() {
+                        theGoodAdapt.FreshHeaderItem(goodsList);
+                    }
+                },1);
+                initGoodList(true);
+            }
+        });
 
         nametext.setText(namelist.get(getIntent().getIntExtra("type",8)));
     }
 
-    private void initGoodList() {
+    private void initGoodList(final boolean isfresh) {
         OkHttpClient client= new OkHttpClient();
         Request request = new Request.Builder().url(address+type).build();
         client.newCall(request).enqueue(new Callback() {
@@ -63,11 +81,13 @@ public class TheGoodListAcitivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 String data = response.body().string();
                 try {
+                    if (isfresh){
+                        goodsList.clear();
+                    }
                     JSONObject jsonObject = new JSONObject(data);
                     JSONArray jsonArray = (JSONArray) jsonObject.get("data");
                     for (int i=0;i<jsonArray.length();i++){
                         Goods goods =new Goods();
-
                         JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
                         Log.e("--->" ,jsonObject1.getString("productId"));
                         goods.setGood_Id(jsonObject1.get("productId").toString());
@@ -77,12 +97,19 @@ public class TheGoodListAcitivity extends AppCompatActivity {
                         goods.setPictures(jsonObject1.get("productIcon").toString());
                         jsonObject1.get("productWant");
                         goodsList.add(goods);
+
                     }
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            theGoodAdapt= new TheGoodAdapt(TheGoodListAcitivity.this,goodsList);
-                            recyclerView.setAdapter(theGoodAdapt);
+
+//                            if (!isfresh) {
+                                theGoodAdapt = new TheGoodAdapt(TheGoodListAcitivity.this, goodsList);
+
+                                recyclerView.setAdapter(theGoodAdapt);
+//                            }
+                            Log.e("====>", goodsList.size()+"" );
+                            refreshLayout.setRefreshing(false);
                         }
                     });
                 } catch (JSONException e) {

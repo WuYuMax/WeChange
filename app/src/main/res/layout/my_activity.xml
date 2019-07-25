@@ -28,17 +28,47 @@
                     android:layout_centerInParent="true"
                     />
             </RelativeLayout>
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </android.support.v7.widget.RecyclerView>
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="然后？没有然后了"
-                android:gravity="center"
-                />
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="我参加的活动"
+                    android:textSize="20dp"
+                    />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/my_action_jion"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="我组织的活动"
+                    android:textSize="20dp"
+                    />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/my_action_set"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

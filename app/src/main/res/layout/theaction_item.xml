@@ -24,6 +24,34 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             >
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/item_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="让我康康"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_blue_light"
+
+                    />
+                <TextView
+                    android:id="@+id/item_canceal"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+
+
+                    android:text="退出"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_blue_light"
+                    />
+            </LinearLayout>
             <TextView
                 android:id="@+id/the_action_name"
                 android:layout_width="match_parent"

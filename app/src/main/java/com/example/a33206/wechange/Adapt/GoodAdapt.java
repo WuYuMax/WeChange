@@ -95,7 +95,10 @@ public class GoodAdapt extends RecyclerView.Adapter<GoodAdapt.ViewHolder> {
     public int getItemCount() {
         return mgoodsList.size();
     }
+    public void FreshHeaderItem(){
+        mgoodsList.clear();
+        notifyDataSetChanged();
 
-
+    }
 
 }

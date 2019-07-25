@@ -4,14 +4,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v4.widget.DrawerLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/action_swip"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/action_drawer"
-        >
+        android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#ceffe6"
             >
 
             <RelativeLayout
@@ -58,16 +58,6 @@
             </android.support.v7.widget.RecyclerView>
 
         </RelativeLayout>
-        <android.support.design.widget.NavigationView
-            android:id="@+id/action_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:menu="@menu/menu_good"
-            app:headerLayout="@layout/action_menu"
-            android:layout_gravity="start"
-            >
-        </android.support.design.widget.NavigationView>
-    </android.support.v4.widget.DrawerLayout>
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

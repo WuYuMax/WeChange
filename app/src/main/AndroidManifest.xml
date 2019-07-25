@@ -23,6 +23,7 @@
                 android:resource="@xml/file_paths"
                 ></meta-data>
         </provider>
+        <activity android:name=".My.MyGoodList"></activity>
         <activity android:name=".My.MyActivity"></activity>
         <activity android:name=".My.MyMessageActivity"></activity>
         <activity android:name=".Action.ActionReleaseActivity"></activity>

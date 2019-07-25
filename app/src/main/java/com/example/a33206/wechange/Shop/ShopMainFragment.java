@@ -51,7 +51,7 @@ public class ShopMainFragment extends Fragment {
     private Button jiajvbutton;
     private Button otherbutton;
     private String responseDate;
-    private String loadaddress="http://www.codeskystar.cn:8080/market/app/home";
+    private String loadaddress="http://140.143.224.210:8080/market/app/home";
     private static boolean hasMore = false; // 是否有下一页
     private static int currentPage ;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -81,6 +81,7 @@ public class ShopMainFragment extends Fragment {
         recyclerView=view.findViewById(R.id.shopfragment_main_recyle);
         swipeRefreshLayout=view.findViewById(R.id.shop_main_swip);
         GoodAdapt adapt = new GoodAdapt(getActivity(),goodsList);
+
         recyclerView.setAdapter(adapt);
         if (goodsList.size()==0){
             initGoodList(loadaddress,true);

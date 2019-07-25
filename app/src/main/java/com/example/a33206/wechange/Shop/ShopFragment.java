@@ -27,9 +27,9 @@ public class ShopFragment extends Fragment {
     private   ViewPager viewPager;
     private   TabLayout tabLayout;
     private ShopMainFragment mainFragment ;
-    private ShopGooditemFragment gooditemFragment;
-    private ShopGooditemFragment gooditemFragment2;
-    private ShopGooditemFragment gooditemFragment3;
+    private ShopGooditemFragment gooditemFragment=new ShopGooditemFragment(0);
+    private ShopGooditemFragment gooditemFragment2=new ShopGooditemFragment(1);
+    private ShopGooditemFragment gooditemFragment3=new ShopGooditemFragment(7);
     private ViewPagerTabAdpater viewPagerTabAdapt =null;
     private List<Fragment> fragmentList = new ArrayList<>();
     private List<String> TabList = new ArrayList<>();
@@ -42,9 +42,7 @@ public class ShopFragment extends Fragment {
         tabLayout = view.findViewById(R.id.shopfragment_tab);
         addbutton = view.findViewById(R.id.shop_add);
         mainFragment = new ShopMainFragment();
-        gooditemFragment = new ShopGooditemFragment("服饰");
-        gooditemFragment2=new ShopGooditemFragment("电器");
-        gooditemFragment3 = new ShopGooditemFragment("摆件");
+
 
         return view;
     }
@@ -67,9 +65,9 @@ public class ShopFragment extends Fragment {
         });
         if (TabList.size()==0) {
             TabList.add("首页");
-            TabList.add("服饰");
+            TabList.add("手机");
             TabList.add("电器");
-            TabList.add("摆件");
+            TabList.add("其他");
             fragmentList.add(mainFragment);
             fragmentList.add(gooditemFragment);
             fragmentList.add(gooditemFragment2);
@@ -79,4 +77,5 @@ public class ShopFragment extends Fragment {
         viewPager.setAdapter(viewPagerTabAdapt);
         tabLayout.setupWithViewPager(viewPager);
     }
+
 }
